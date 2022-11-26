@@ -189,6 +189,7 @@ export class AddStoryComponent implements OnInit {
         title: "You've reached a limit for additional media",
         body: 'Please add only 10 additional media files',
         okButton: 'Ok',
+        cancel: false,
       },
       restoreFocus: false,
       height: '225px',
