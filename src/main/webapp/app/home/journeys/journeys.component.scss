@@ -1,0 +1,12 @@
+.header {
+  display: flex;
+  justify-content: space-between;
+  .title {
+    font-size: 20px;
+    font-weight: 600;
+  }
+  .filters {
+    font-size: 20px;
+    font-weight: 600;
+  }
+}

@@ -1,0 +1,18 @@
+<div class="story" [routerLink]="'/story/' + story.id" [state]="{ story: story }">
+  <div class="story-image">
+    <img [src]="story.coverImage" />
+  </div>
+  <div class="story-text">
+    <span class="title">{{ story.title }}</span>
+    <br />
+    <div class="bottom">
+      <span class="author">
+        <img *ngIf="userProfile.coverImage" class="authorPic" [src]="userProfile.coverImage" />
+        <span class="authorText">{{ story.author }}</span> &nbsp;
+        <span *ngIf="coAuthors.length > 1">{{ ' and ' + coAuthors.length + ' others' }} </span>
+        <span *ngIf="coAuthors.length === 1">{{ ' and ' + coAuthors.length + ' other' }} </span>
+      </span>
+      <span class="date">{{ returnDate(story.createdDate) }}</span>
+    </div>
+  </div>
+</div>

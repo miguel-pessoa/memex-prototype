@@ -1,0 +1,18 @@
+<div class="journey" [routerLink]="'/journey/' + journey.id">
+  <div class="journey-image">
+    <img />
+  </div>
+  <div class="journey-text">
+    <span class="title">{{ journey.title }}</span>
+    <br />
+    <div class="bottom">
+      <span class="author">
+        <span class="authorPic"></span>
+        <span class="authorText">{{ journey }}</span>
+      </span>
+      <span *ngIf="journey.stories.length > 1">{{ 'and ' + journey.stories.length + 'others' }} </span>
+      <span *ngIf="journey.stories.length === 1">{{ 'and ' + journey.stories.length + 'other' }} </span>
+      <span class="date">{{ journey.date }}</span>
+    </div>
+  </div>
+</div>

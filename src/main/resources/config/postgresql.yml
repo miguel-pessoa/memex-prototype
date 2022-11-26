@@ -1,0 +1,14 @@
+version: '2'
+services:
+  meme-postgresql:
+    build:
+      context: ./postgresql
+    command: ['postgres', '-c', 'shared_preload_libraries=pgaudit', '-c', 'log_line_prefix=%m %h %u %d [%p]: ']
+    # volumes:
+    #     - ~/volumes/jhipster/memex/postgresql/:/var/lib/postgresql/data/
+    environment:
+      - POSTGRES_USER=memex
+      - POSTGRES_PASSWORD=
+      - POSTGRES_HOST_AUTH_METHOD=trust
+    ports:
+      - 5432:5432

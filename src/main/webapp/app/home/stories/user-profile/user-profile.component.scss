@@ -1,0 +1,62 @@
+@import '~bootstrap/scss/functions';
+@import '../../../../content/scss/_variables';
+@import '../../../../content/scss/_bootstrap-variables';
+
+.title {
+  font-size: 20px;
+  font-weight: 600;
+  margin-top: -10px;
+  margin-bottom: 20px;
+  display: inline-block;
+  mat-icon {
+    vertical-align: text-top;
+  }
+}
+
+.file-input {
+  display: none;
+}
+
+.user-image {
+  margin: -10px 10px 10px;
+  .placeholder {
+    color: white;
+    font-size: 40px;
+    width: 60px;
+    height: 60px;
+    line-height: 55px;
+    text-align: center;
+    background: lighten($primary, 35%);
+    border-radius: 30px;
+    display: inline-block;
+  }
+  div.username {
+    line-height: 37px;
+    display: block;
+    font-weight: 600;
+    margin: -50px 0px 24px 69px;
+  }
+  .image {
+    width: 60px;
+    height: 60px;
+    border-radius: 30px;
+    display: inline-block;
+  }
+  .overlay {
+    display: none;
+  }
+  &:hover {
+    .placeholder {
+      opacity: 0.9;
+    }
+  }
+}
+
+.mat-button {
+  float: right;
+  background-color: $secondary;
+  font-weight: 600;
+  color: #eee;
+  margin-bottom: 24px;
+  font-size: 16px;
+}

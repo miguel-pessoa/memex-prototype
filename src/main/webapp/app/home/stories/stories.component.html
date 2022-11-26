@@ -1,0 +1,45 @@
+<mat-sidenav-container class="example-container">
+  <mat-sidenav mode="over" [(opened)]="filters">
+    <span class="title">Story filters:</span>
+    <mat-checkbox [(ngModel)]="myStories" (change)="selectFilter()">My stories</mat-checkbox>
+    <mat-checkbox [(ngModel)]="recentStories" (change)="selectFilter()">Recently added</mat-checkbox>
+    <mat-checkbox (change)="selectFilter()">TODO</mat-checkbox>
+    <jhi-valid-input
+      [size]="'large'"
+      [label]="'Authors'"
+      [control]="authorsFormControl"
+      (keydown)="addCoAuthorFilter($event)"
+    ></jhi-valid-input>
+
+    <div class="additional-authors" *ngIf="coAuthorsFilter && coAuthorsFilter.length > 0">
+      <div class="author" *ngFor="let coAuthor of coAuthorsFilter">
+        <span>{{ coAuthor }}</span>
+        <mat-icon (click)="removeCoAuthorFilter(coAuthor)">close</mat-icon>
+      </div>
+    </div>
+
+    <jhi-valid-input [size]="'large'" [label]="'Tags'" [control]="tagsFormControl" (keydown)="addTagsFilter($event)"></jhi-valid-input>
+
+    <div class="tags" *ngIf="tagsFilter && tagsFilter.length > 0">
+      <div class="tag" *ngFor="let tag of tagsFilter">
+        <span>{{ tag }}</span>
+        <mat-icon (click)="removeTagsFilter(tag)">close</mat-icon>
+      </div>
+    </div>
+  </mat-sidenav>
+  <mat-sidenav-content>
+    <div class="user">
+      <img class="user-image" *ngIf="userProfile.coverImage" [src]="userProfile.coverImage" />
+      <span class="title"> <mat-icon class="userIcon" *ngIf="!userProfile.coverImage">person</mat-icon> Hello, User 1</span>
+      <div class="link" (click)="userProfileModal()">Edit user info <mat-icon>edit</mat-icon></div>
+    </div>
+    <button mat-button class="floating-button" routerLink="/add-story">Create <mat-icon>add</mat-icon></button>
+    <div class="header">
+      <span class="title">Stories</span>
+      <span class="filters" (click)="toggleFilters()"><mat-icon>filter_list</mat-icon></span>
+    </div>
+    <div class="stories-padding">
+      <jhi-story *ngFor="let story of displayedStories" [story]="story"></jhi-story>
+    </div>
+  </mat-sidenav-content>
+</mat-sidenav-container>

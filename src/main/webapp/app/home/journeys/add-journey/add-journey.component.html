@@ -1,0 +1,50 @@
+<span class="title"> <mat-icon (click)="back()">arrow_back</mat-icon> Create new journey </span>
+<div
+  class="background-journey"
+  [ngClass]="{
+    color1: selectedColorClass === 'color1',
+    color2: selectedColorClass === 'color2',
+    color3: selectedColorClass === 'color3',
+    color4: selectedColorClass === 'color4',
+    color5: selectedColorClass === 'color5'
+  }"
+>
+  <div class="step">
+    <div class="cover-image">
+      <img *ngIf="journey.coverImage" />
+      <div class="add-cover-image" *ngIf="!journey.coverImage">
+        <mat-icon>add_photo_alternate</mat-icon>
+        <br />
+        Add cover image *
+      </div>
+    </div>
+    <br />
+    <jhi-valid-input [size]="'large'" [label]="'Story title *'" [(model)]="journey.title"></jhi-valid-input>
+    <br />
+    <mat-form-field appearance="outline" class="w-100 textarea">
+      <textarea #descriptionInput matInput cdkTextareaAutosize [formControl]="descriptionFormControl"></textarea>
+      <mat-label> Description</mat-label>
+    </mat-form-field>
+    <button mat-button *ngIf="stepCount === 0" (click)="nextStep(0)">Next</button>
+  </div>
+
+  <div *ngIf="stepCount > 0">
+    <span class="subtitle"> Select journey's color </span>
+
+    <div class="color-select">
+      <div class="color1" (click)="selectColor(1)"></div>
+      <div class="color2" (click)="selectColor(2)"></div>
+      <div class="color3" (click)="selectColor(3)"></div>
+      <div class="color4" (click)="selectColor(4)"></div>
+      <div class="color5" (click)="selectColor(5)"></div>
+    </div>
+
+    <span class="subtitle"> Select type of journey <mat-icon>info</mat-icon> </span>
+
+    <mat-button-toggle-group class="order-select">
+      <mat-button-toggle>Ordered</mat-button-toggle>
+      <mat-button-toggle>Unordered</mat-button-toggle>
+    </mat-button-toggle-group>
+    <button mat-button (click)="publish()">Publish</button>
+  </div>
+</div>

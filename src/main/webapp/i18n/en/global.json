@@ -3,7 +3,8 @@
     "title": "Memex",
     "browsehappy": "You are using an <strong>outdated</strong> browser. Please <a href=\"http://browsehappy.com/?locale=en\">upgrade your browser</a> to improve your experience.",
     "menu": {
-      "home": "Home",
+      "home": "Stories list",
+      "journeys": "Journeys list",
       "jhipster-needle-menu-add-element": "JHipster will add additional menu entries here (do not translate!)",
       "entities": {
         "main": "Entities",
@@ -137,5 +138,10 @@
       "not.image": "File was expected to be an image but was found to be \"{{ fileType }}\""
     }
   },
-  "footer": "This is your footer"
+  "footer": "MEMEX Project prototype",
+  "stories": {
+    "add": {
+      "title": "Create new story"
+    }
+  }
 }

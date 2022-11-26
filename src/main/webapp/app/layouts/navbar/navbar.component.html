@@ -1,8 +1,8 @@
-<nav data-cy="navbar" class="navbar navbar-dark navbar-expand-md bg-primary">
+<nav data-cy="navbar" class="navbar navbar-light navbar-expand-md bg-primary">
   <a class="navbar-brand logo" routerLink="/" (click)="collapseNavbar()">
     <span class="logo-img"></span>
-    <span jhiTranslate="global.title" class="navbar-title">Memex</span>
-    <span class="navbar-version">{{ version }}</span>
+    <!--span jhiTranslate="global.title" class="navbar-title">Memex</span>
+    <span class="navbar-version">{{ version }}</span-->
   </a>
   <a
     class="navbar-toggler d-lg-none"
@@ -21,13 +21,37 @@
       <li class="nav-item" routerLinkActive="active" [routerLinkActiveOptions]="{ exact: true }">
         <a class="nav-link" routerLink="/" (click)="collapseNavbar()">
           <span>
-            <fa-icon icon="home"></fa-icon>
+            <mat-icon>receipt</mat-icon>
             <span jhiTranslate="global.menu.home">Home</span>
           </span>
         </a>
       </li>
+      <li class="nav-item" routerLinkActive="active" [routerLinkActiveOptions]="{ exact: true }">
+        <a class="nav-link" routerLink="/journeys" (click)="collapseNavbar()">
+          <span>
+            <mat-icon>timeline</mat-icon>
+            <span jhiTranslate="global.menu.journeys">Home</span>
+          </span>
+        </a>
+      </li>
+      <li class="nav-item" routerLinkActive="active" [routerLinkActiveOptions]="{ exact: true }">
+        <a class="nav-link" routerLink="/story-graph" (click)="collapseNavbar()">
+          <span>
+            <mat-icon>bubble_chart</mat-icon>
+            <span>Story graph</span>
+          </span>
+        </a>
+      </li>
+      <li class="nav-item" routerLinkActive="active" [routerLinkActiveOptions]="{ exact: true }">
+        <a class="nav-link" routerLink="/author-graph" (click)="collapseNavbar()">
+          <span>
+            <mat-icon>bubble_chart</mat-icon>
+            <span>Author graph</span>
+          </span>
+        </a>
+      </li>
       <!-- jhipster-needle-add-element-to-menu - JHipster will add new menu items here -->
-      <li
+      <!--li
         *ngSwitchCase="true"
         ngbDropdown
         class="nav-item dropdown pointer"
@@ -42,10 +66,9 @@
           </span>
         </a>
         <ul class="dropdown-menu" ngbDropdownMenu aria-labelledby="entity-menu">
-          <!-- jhipster-needle-add-entity-to-menu - JHipster will add entities to the menu here -->
         </ul>
-      </li>
-      <li
+      </li-->
+      <!--li
         *jhiHasAnyAuthority="'ROLE_ADMIN'"
         ngbDropdown
         class="nav-item dropdown pointer"
@@ -72,9 +95,8 @@
               <span jhiTranslate="global.menu.admin.apidocs">API</span>
             </a>
           </li>
-          <!-- jhipster-needle-add-element-to-admin-menu - JHipster will add entities to the admin menu here -->
         </ul>
-      </li>
+      </li-->
       <li ngbDropdown class="nav-item dropdown pointer" display="dynamic" *ngIf="languages && languages.length > 1">
         <a class="nav-link dropdown-toggle" ngbDropdownToggle href="javascript:void(0);" id="languagesnavBarDropdown">
           <span>

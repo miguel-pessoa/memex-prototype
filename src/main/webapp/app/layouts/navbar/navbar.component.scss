@@ -1,6 +1,6 @@
 @import '~bootstrap/scss/functions';
-@import '~bootswatch/dist/minty/variables';
-@import '~bootstrap/scss/variables';
+@import '../../../content/scss/_variables';
+@import '../../../content/scss/_bootstrap-variables';
 
 /* ==========================================================================
 Navbar
@@ -46,9 +46,9 @@ Logo styles
 ========================================================================== */
 .logo-img {
   height: 45px;
-  width: 45px;
+  width: 145px;
   display: inline-block;
   vertical-align: middle;
-  background: url('../../../content/images/logo-jhipster.png') no-repeat center center;
+  background: url('../../../content/images/memex.svg') no-repeat center center;
   background-size: contain;
 }

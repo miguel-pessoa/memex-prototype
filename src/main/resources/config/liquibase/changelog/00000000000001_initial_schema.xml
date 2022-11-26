@@ -1,0 +1,64 @@
+<?xml version="1.0" encoding="utf-8"?>
+<databaseChangeLog
+    xmlns="http://www.liquibase.org/xml/ns/dbchangelog"
+    xmlns:ext="http://www.liquibase.org/xml/ns/dbchangelog-ext"
+    xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+    xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-4.6.xsd
+                        http://www.liquibase.org/xml/ns/dbchangelog-ext http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-ext.xsd">
+
+    <changeSet author="jhipster" id="00000000000003" >
+        <createTable tableName="story">
+            <column  name="id" type="BIGINT">
+                <constraints primaryKey="true" primaryKeyName="story_id"/>
+            </column>
+            <column name="title" type="varchar(255)"/>
+            <column name="location" type="varchar(255)"/>
+            <column name="description" type="varchar(2000)"/>
+            <column name="tags" type="varchar(2000)"/>
+            <column name="cover_image" type="text"/>
+            <column name="add_cover_image1" type="text"/>
+            <column name="add_cover_image2" type="text"/>
+            <column name="add_cover_image3" type="text"/>
+            <column name="add_cover_image4" type="text"/>
+            <column name="add_cover_image5" type="text"/>
+            <column name="add_cover_image6" type="text"/>
+            <column name="add_cover_image7" type="text"/>
+            <column name="add_cover_image8" type="text"/>
+            <column name="add_cover_image9" type="text"/>
+            <column name="add_cover_image10" type="text"/><column name="additional_media" type="varchar(2000)"/>
+            <column name="author" type="varchar(255)"/>
+            <column name="co_authors" type="varchar(2000)"/>
+            <column name="co_authors_approved" type="varchar(2000)"/>
+            <column name="published" type="boolean"/>
+            <column name="progress" type="BIGINT"/>
+            <column name="created_date" type="timestamp"/>
+            <column name="updated_date" type="timestamp"/>
+        </createTable>
+
+        <createTable tableName="journey">
+            <column  name="id" type="BIGINT">
+                <constraints primaryKey="true" primaryKeyName="journey_id"/>
+            </column>
+            <column name="title" type="varchar(255)"/>
+            <column name="description" type="varchar(2000)"/>
+            <column name="cover_image" type="text"/>
+            <column name="storys_ids" type="varchar(2000)"/>
+            <column name="published" type="boolean"/>
+            <column name="progress" type="BIGINT"/>
+            <column name="color" type="BIGINT"/>
+            <column name="created_date" type="timestamp"/>
+            <column name="updated_date" type="timestamp"/>
+        </createTable>
+
+        <createTable tableName="user_profile">
+            <column  name="id" type="BIGINT">
+                <constraints primaryKey="true" primaryKeyName="user_profile_id"/>
+            </column>
+            <column name="username" type="varchar(255)"/>
+            <column name="cover_image" type="text"/>
+            <column name="name" type="varchar(2000)"/>
+            <column name="age" type="BIGINT"/>
+        </createTable>
+
+    </changeSet>
+</databaseChangeLog>

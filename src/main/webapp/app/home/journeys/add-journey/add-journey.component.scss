@@ -1,0 +1,145 @@
+@import '~bootstrap/scss/functions';
+@import '../../../../content/scss/_variables';
+@import '../../../../content/scss/_bootstrap-variables';
+
+.title {
+  font-size: 20px;
+  font-weight: 600;
+  margin-top: -10px;
+  margin-bottom: 10px;
+  display: inline-block;
+  mat-icon {
+    vertical-align: text-top;
+  }
+}
+
+.subtitle {
+  font-size: 18px;
+  font-weight: 600;
+  margin-top: -10px;
+  margin-bottom: 10px;
+  display: block;
+  mat-icon {
+    vertical-align: text-top;
+  }
+}
+
+.step:not(:first) {
+  margin-top: 20px;
+}
+
+.cover-image {
+  .image {
+  }
+  .add-cover-image {
+    text-align: center;
+    height: 180px;
+    border: 1px solid lighten($primary, 30%);
+    border-radius: 4px;
+    background-color: lighten($primary, 30%);
+    font-size: 18px;
+    font-weight: 600;
+    color: #eee;
+    padding: 30px;
+    mat-icon {
+      transform: scale(5);
+      margin: 30px;
+      color: lighten($secondary, 45%);
+    }
+  }
+}
+
+.mat-button {
+  float: right;
+  background-color: $secondary;
+  font-weight: 600;
+  color: #eee;
+  font-size: 16px;
+  margin-top: 10px;
+}
+
+.color-select {
+  display: flex;
+  justify-content: space-between;
+  padding: 0 20px 20px;
+  div {
+    width: 35px;
+    display: inline-block;
+    height: 35px;
+    border-radius: 25px;
+    &.color1 {
+      background-color: lighten($primary, 10%);
+      border: 2px solid $primary;
+    }
+    &.color2 {
+      background-color: lighten(rgb(255, 255, 117), 10%);
+      border: 2px solid rgb(255, 255, 117);
+    }
+    &.color3 {
+      background-color: lighten($secondary, 10%);
+      border: 2px solid $secondary;
+    }
+    &.color4 {
+      background-color: lighten(rgb(82, 207, 82), 10%);
+      border: 2px solid rgb(82, 207, 82);
+    }
+    &.color5 {
+      background-color: lighten(rgb(255, 0, 157), 10%);
+      border: 2px solid rgb(255, 0, 157);
+    }
+  }
+}
+
+.order-select {
+  width: calc(100% - 40px);
+  margin: 10px 20px;
+  height: 35px;
+  border-radius: 18px;
+}
+
+:host ::ng-deep {
+  mat-button-toggle-group {
+    * {
+      height: 35px;
+    }
+  }
+
+  mat-button-toggle {
+    width: 50%;
+
+    span {
+      margin-top: -20px;
+    }
+  }
+
+  mat-form-field-outline {
+    background: white !important;
+    border-radius: 4px;
+    opacity: 1;
+  }
+}
+
+.background-journey {
+  padding: 5px;
+  border-radius: 4px;
+  &.color1 {
+    background-color: lighten($primary, 40%);
+    border: 2px solid $primary;
+  }
+  &.color2 {
+    background-color: lighten(rgb(255, 255, 117), 20%);
+    border: 2px solid rgb(255, 255, 117);
+  }
+  &.color3 {
+    background-color: lighten($secondary, 30%);
+    border: 2px solid $secondary;
+  }
+  &.color4 {
+    background-color: lighten(rgb(82, 207, 82), 30%);
+    border: 2px solid rgb(82, 207, 82);
+  }
+  &.color5 {
+    background-color: lighten(rgb(255, 0, 157), 40%);
+    border: 2px solid rgb(255, 0, 157);
+  }
+}

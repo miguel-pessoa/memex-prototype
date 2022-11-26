@@ -1,0 +1,16 @@
+<span class="title"> <mat-icon (click)="closeDialog()">arrow_back</mat-icon>Edit user info: </span>
+
+<input type="file" class="file-input" (change)="onImageSelected($event)" #imageFileUpload />
+<div class="user-image" (click)="imageFileUpload.click()">
+  <mat-icon class="placeholder" *ngIf="!coverPicture">add_a_photo</mat-icon>
+  <img class="image" *ngIf="coverPicture" [src]="coverPicture" />
+  <div class="username" *ngIf="account">
+    <div>Username: {{ account.login }}</div>
+  </div>
+</div>
+
+<jhi-valid-input [control]="nameFormControl" [size]="'large'" [label]="'Name'" [(model)]="userProfile.name"></jhi-valid-input>
+
+<jhi-valid-input [control]="ageFormControl" [size]="'large'" [label]="'Age'" [(model)]="userProfile.age"></jhi-valid-input>
+
+<button mat-button (click)="okButton()">Update</button>

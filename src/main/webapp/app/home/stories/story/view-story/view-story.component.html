@@ -1,0 +1,44 @@
+<div class="header">
+  <span class="title"> <mat-icon (click)="goBack()">arrow_back</mat-icon> {{ story.title }}</span>
+  <span class="subtitle"> by {{ story.author }}</span>
+</div>
+
+<div class="story-content">
+  <div class="story-cover">
+    <img [src]="story.coverImage" />
+  </div>
+
+  <div class="story-cover" *ngFor="let media of selectedMedia">
+    <img [src]="media" />
+  </div>
+
+  <div class="description">
+    {{ story.description }}
+  </div>
+
+  <div class="additional-authors">
+    <span class="title" *ngIf="coAuthorsApproved && coAuthorsApproved.length > 0">Co-authors</span>
+    <span class="author" *ngFor="let author of coAuthorsApproved">
+      {{ author }}
+    </span>
+    <span class="title" *ngIf="coAuthors && coAuthors.length > 0">Co-authors pending approval</span>
+    <span class="author" *ngFor="let author of coAuthors">
+      {{ author }}
+    </span>
+  </div>
+
+  <div class="tags">
+    <span class="title" *ngIf="tags && tags.length > 0">Tags</span>
+    <span class="tag" *ngFor="let tag of tags">
+      {{ tag }}
+    </span>
+  </div>
+
+  <button mat-button class="floating-button" routerLink="/add-story" [state]="{ story: story }">
+    Edit story <mat-icon>edit</mat-icon>
+  </button>
+  <button mat-button class="floating-button-blue" routerLink="/journeys-list" [state]="{ story: story }">
+    Link to journey <mat-icon>link</mat-icon>
+  </button>
+  <button mat-button class="floating-button-grey" (click)="deleteStoryPopup()">Delete <mat-icon>delete</mat-icon></button>
+</div>

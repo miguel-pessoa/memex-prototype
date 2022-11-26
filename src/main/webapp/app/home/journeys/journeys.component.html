@@ -1,0 +1,10 @@
+<div class="header">
+  <span class="title"> Journeys</span>
+  <span class="filters"><mat-icon>filter_list</mat-icon></span>
+</div>
+
+<!-- FILTERS-->
+
+<jhi-journey *ngFor="let journey of journeys" [journey]="journey" (click)="linkStoryWithJourney(journey)"></jhi-journey>
+
+<button mat-button class="floating-button" routerLink="/add-journey">Create <mat-icon>add</mat-icon></button>

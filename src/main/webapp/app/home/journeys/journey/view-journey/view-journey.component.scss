@@ -1,0 +1,10 @@
+.header {
+  display: flex;
+  .title {
+    font-size: 20px;
+    font-weight: 600;
+    mat-icon {
+      vertical-align: text-top;
+    }
+  }
+}

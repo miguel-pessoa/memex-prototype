@@ -1,0 +1,144 @@
+@import '../../../../content/scss/_variables.scss';
+
+:host ::ng-deep {
+  .datepicker {
+    .mat-icon-button {
+      right: -11px;
+      position: absolute;
+      top: -6px;
+    }
+    .mat-input-element {
+      margin-right: -45px;
+    }
+  }
+  .mat-focused,
+  .mat-focused.mat-form-field-invalid {
+    .mat-form-field-label {
+      color: $primary;
+    }
+
+    .mat-form-field-required-marker {
+      color: $primary;
+    }
+
+    .mat-form-field-outline-thick {
+      color: $primary;
+    }
+
+    .mat-form-field-outline {
+      color: $primary;
+      background: white;
+      border-radius: 4px;
+    }
+
+    .mat-form-field-outline-start,
+    .mat-form-field-outline-gap,
+    .mat-form-field-outline-end {
+      color: $primary;
+      border-width: 2px;
+    }
+  }
+
+  .default.mat-focused,
+  .default.raised-label {
+    .mat-form-field-label-wrapper {
+      top: -0.85em;
+    }
+  }
+
+  .large {
+    .mat-form-field-outline {
+      height: 48px;
+      background: white;
+      border-radius: 4px;
+    }
+
+    .mat-form-field-label-wrapper {
+      top: -1.2em;
+    }
+
+    .mat-form-field-infix {
+      padding: 7px 0 12px 0;
+      height: 48px;
+    }
+    &.mat-form-field-appearance-outline.mat-form-field-can-float.mat-form-field-should-float .mat-form-field-label {
+      transform: translateY(-1.4em) scale(0.75);
+      width: 133.3333333333%;
+    }
+  }
+
+  .default {
+    .mat-form-field-outline {
+      height: 36px;
+      background: white;
+      border-radius: 4px;
+    }
+
+    .mat-form-field-label-wrapper {
+      top: -1.5em;
+    }
+
+    .mat-form-field-infix {
+      padding: 1px 0 12px 0;
+    }
+  }
+
+  .mat-form-field-label-wrapper {
+    transition: top 0.1s;
+  }
+
+  .mat-input-element {
+    color: mat-color($primary, A800);
+  }
+
+  .mat-form-field-appearance-outline .mat-form-field-flex {
+    padding: 0 8px 0 12px;
+  }
+
+  .readonly {
+    background-color: #fff;
+  }
+
+  .readonly .mat-form-field-outline,
+  .disabled .mat-form-field-outline {
+    background-color: #fafafa;
+  }
+  .error-input {
+    .mat-form-field-outline-start,
+    .mat-form-field-outline-gap,
+    .mat-form-field-outline-end {
+      color: $secondary;
+      border-width: 2px;
+    }
+    .mat-form-field-label {
+      color: $secondary;
+      * {
+        background-color: white !important;
+        padding: 0 4px;
+        margin-left: -4px;
+      }
+    }
+    .mat-form-field-required-marker {
+      color: $secondary;
+    }
+    margin-bottom: 10px;
+  }
+
+  .mat-form-field-outline {
+    min-height: 38px;
+  }
+
+  .mat-hint {
+    float: right;
+    margin-top: 1em;
+    margin-right: -0.5em;
+  }
+
+  .mat-error {
+    width: 80%;
+    text-overflow: ellipsis;
+    overflow: hidden;
+    display: inline-block;
+    margin-top: 15px;
+  }
+}

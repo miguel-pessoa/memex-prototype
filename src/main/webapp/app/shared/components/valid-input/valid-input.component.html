@@ -1,0 +1,45 @@
+<mat-form-field
+  [appearance]="appearance"
+  [style]="'width:' + width"
+  class="filter red"
+  [class.large]="size === 'large'"
+  [class.default]="size === 'default'"
+  [ngClass]="model ? 'raised-label' : ''"
+  [class.disabled]="disabled"
+  [class.readonly]="readonly"
+  [class.error-input]="control.errors && control.touched"
+>
+  <mat-label>{{ label }}</mat-label>
+  <div *ngIf="type === 'text'">
+    <input
+      matInput
+      [formControl]="control"
+      [errorStateMatcher]="matcher"
+      [value]="isCurrency ? (getValueAsNumber() | currency: 'EUR':'') : control.value"
+      [ngStyle]="{ 'text-align': align, 'text-overflow': ellipsis ? 'ellipsis' : 'none' }"
+      #input
+      [readonly]="readonly"
+      [type]="type"
+      [class]="customClass + ' ' + size + ' ' + getColorClass()"
+      [name]="name"
+      [id]="id"
+      (blur)="updateIfCurrency()"
+    />
+    <mat-error *ngIf="control.touched && control.errors?.required">{{ 'common.error.mandatory' | translate }}</mat-error>
+    <mat-error *ngIf="control.touched && !control.errors?.required && (control.errors?.invalid || control.errors?.email)">{{
+      'common.error.invalid' | translate
+    }}</mat-error>
+    <mat-hint *ngIf="charCountHint && max !== -1" align="end">{{ input.value?.length || 0 }}/{{ max }}</mat-hint>
+  </div>
+  <div *ngIf="type === 'datepicker'" class="datepicker">
+    <input matInput [matDatepicker]="picker" [formControl]="control" [errorStateMatcher]="matcher" [(ngModel)]="model" #dateInput />
+    <mat-error *ngIf="control.touched && !(control.errors?.invalid || control.errors?.matDatepickerParse) && control.errors?.required">{{
+      'common.error.mandatory' | translate
+    }}</mat-error>
+    <mat-error *ngIf="control.touched && (control.errors?.invalid || control.errors?.matDatepickerParse)">{{
+      'common.error.invalid' | translate
+    }}</mat-error>
+    <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
+    <mat-datepicker #picker></mat-datepicker>
+  </div>
+</mat-form-field>

@@ -1,0 +1,41 @@
+.journey {
+  margin: 15px 0px 0;
+  border-radius: 4px;
+  border: 1px solid #ddd;
+  overflow: hidden;
+  .journey-image {
+    background-color: red;
+    height: 20vh;
+    width: 100%;
+  }
+  .journey-text {
+    padding: 5px;
+    .title {
+      font-size: 20px;
+      font-weight: 600;
+    }
+    .bottom {
+      display: flex;
+      justify-content: space-between;
+      .author {
+        display: flex;
+        align-items: center;
+        .authorPic {
+          display: inline-block;
+          margin-right: 4px;
+          height: 16px;
+          width: 16px;
+          border-radius: 8px;
+          background-color: blue;
+        }
+        .authorText {
+          font-size: 16px;
+          font-weight: 600;
+        }
+      }
+      .date {
+        font-size: 14px;
+      }
+    }
+  }
+}

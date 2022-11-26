@@ -1,0 +1,77 @@
+<div class="step">
+  <span class="title"> <mat-icon (click)="back()">arrow_back</mat-icon> Create new story </span>
+  <jhi-valid-input (click)="openMap()" [size]="'large'" [label]="'Location *'" [(model)]="story.location"></jhi-valid-input>
+
+  <div class="cover-image">
+    <img class="image" *ngIf="coverPicture" [src]="coverPicture" />
+    <mat-icon *ngIf="coverPicture" class="remove-image" (click)="coverPicture = ''">close </mat-icon>
+    <input type="file" class="file-input" (change)="onImageSelected($event)" #imageFileUpload />
+    <div class="add-cover-image" (click)="imageFileUpload.click()" *ngIf="!coverPicture">
+      <mat-icon>add_photo_alternate</mat-icon>
+      <br />
+      Add cover image *
+    </div>
+  </div>
+  <div class="cover-image">
+    <input type="file" class="file-input" (change)="onMoreImageSelected($event)" #imageAddFileUpload [multiple]="true" />
+    <div *ngFor="let media of selectedMedia; let i = index">
+      <img class="image" [src]="media" />
+      <mat-icon class="remove-image" (click)="removeAdditionalMedia(media)">close</mat-icon>
+    </div>
+    <div class="add-media" (click)="imageAddFileUpload.click()">
+      <div class="icons">
+        <mat-icon class="icon1">add_photo_alternate</mat-icon>
+        <mat-icon class="icon3">movie_creation</mat-icon>
+        <mat-icon class="icon2">audiotrack</mat-icon>
+      </div>
+      <span>Add additional media</span>
+    </div>
+  </div>
+  <button mat-button *ngIf="stepCount === 0" (click)="nextStep(0)">Next</button>
+</div>
+
+<div *ngIf="stepCount > 0">
+  <jhi-valid-input [control]="titleFormControl" [size]="'large'" [label]="'Story title'" [(model)]="story.title"></jhi-valid-input>
+  <br />
+  <mat-form-field appearance="outline" class="w-100 textarea">
+    <textarea #descriptionInput matInput cdkTextareaAutosize [formControl]="descriptionFormControl"></textarea>
+    <mat-label> Description</mat-label>
+  </mat-form-field>
+  <button mat-button *ngIf="stepCount === 1" (click)="nextStep(1)">Next</button>
+</div>
+
+<div *ngIf="stepCount > 1">
+  <jhi-valid-input
+    [size]="'large'"
+    [label]="'Additional authors'"
+    [control]="authorsFormControl"
+    (keydown)="addCoAuthor($event)"
+    [(model)]="story.description"
+  ></jhi-valid-input>
+
+  <div class="additional-authors" *ngIf="story.coAuthors && story.coAuthors.length > 0">
+    <div class="author" *ngFor="let coAuthor of selectedAuthors">
+      <span>{{ coAuthor }}</span>
+      <mat-icon (click)="removeCoAuthor(coAuthor)">close</mat-icon>
+    </div>
+  </div>
+
+  <button mat-button *ngIf="stepCount === 2" (click)="nextStep(2)">Next</button>
+</div>
+
+<div *ngIf="stepCount > 2">
+  <br />
+  <div>Select at least one tag:</div>
+  <div class="tags">
+    <div
+      class="tag"
+      *ngFor="let tag of tags"
+      [ngClass]="selectedTags.indexOf(tag) !== -1 ? 'selected' : 'unselected'"
+      (click)="selectTag(tag)"
+    >
+      <span>{{ tag }}</span>
+    </div>
+  </div>
+
+  <button mat-button (click)="publish()">Publish</button>
+</div>
