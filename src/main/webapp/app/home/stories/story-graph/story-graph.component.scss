@@ -15,6 +15,11 @@
   .title {
     font-size: 18px;
     font-weight: 600;
+    mat-icon {
+      font-size: 24px;
+      font-weight: 200;
+      vertical-align: sub;
+    }
   }
   .icon {
     font-size: 20px;

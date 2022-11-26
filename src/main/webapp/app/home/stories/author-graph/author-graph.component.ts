@@ -101,7 +101,7 @@ export class AuthorGraphComponent implements AfterViewInit {
   public windowResize(): void {
     const box = this.htmlElement.getBoundingClientRect();
     this.graph.width(box.width);
-    this.graph.height(box.height - 110);
+    this.graph.height(box.height - 125);
     // this.graph.controls().handleResize();
   }
 

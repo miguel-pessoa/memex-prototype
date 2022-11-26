@@ -1,11 +1,11 @@
 <div mat-dialog-title class="d-flex justify-content-between title">
-  <span>{{ data.title }}</span>
+  <span>
+    {{ data.title }}
+  </span>
   <mat-icon mat-dialog-close>close</mat-icon>
 </div>
 <div *ngIf="data.body" class="content main-text-color" [innerHTML]="data.body.split('\n').join('<br>')"></div>
-<img *ngIf="data.isStories" src="./image-stories.png" />
-<img *ngIf="!data.isStories" src="./image-stories.png" />
-
 <div class="d-flex flex-auto justify-content-end mt-36px">
-  <button class="primary" mat-button type="submit" (click)="okButton()">Close</button>
+  <button class="accent" mat-button color="secondary" (click)="closeDialog()">{{ data.cancelButton }}</button>
+  <button class="primary" mat-button type="submit" (click)="okButton()">{{ data.okButton }}</button>
 </div>
