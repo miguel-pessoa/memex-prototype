@@ -20,6 +20,7 @@ import { AgmCoreModule, GoogleMapsAPIWrapper } from '@agm/core';
 import { StoriesService } from 'app/home/stories/stories.service';
 import { UserProfileService } from 'app/home/stories/user-profile/user-profile.service';
 import { GraphInfoDialogComponent } from 'app/home/stories/author-graph/graph-info-dialog/graph-info-dialog.component';
+import { CoAuthorDialogComponent } from 'app/home/stories/co-author-dialog/co-author-dialog.component';
 
 @NgModule({
   imports: [SharedLibsModule, MemexMaterialModule, AgmCoreModule.forRoot({ apiKey: 'AIzaSyD11HNBNysegUw8UtfJi_AxNJ1gX8c38Po' })],
@@ -39,6 +40,7 @@ import { GraphInfoDialogComponent } from 'app/home/stories/author-graph/graph-in
     ConfirmDialogComponent,
     MapComponent,
     GraphInfoDialogComponent,
+    CoAuthorDialogComponent,
   ],
   exports: [
     SharedLibsModule,
@@ -58,6 +60,7 @@ import { GraphInfoDialogComponent } from 'app/home/stories/author-graph/graph-in
     ConfirmDialogComponent,
     MapComponent,
     GraphInfoDialogComponent,
+    CoAuthorDialogComponent,
   ],
   providers: [GoogleMapsAPIWrapper, StoriesService, UserProfileService],
 })

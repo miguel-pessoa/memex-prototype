@@ -4,9 +4,12 @@
   border: 1px solid #ddd;
   overflow: hidden;
   .journey-image {
-    background-color: red;
     height: 20vh;
     width: 100%;
+    overflow: hidden;
+    img {
+      width: 100%;
+    }
   }
   .journey-text {
     padding: 5px;

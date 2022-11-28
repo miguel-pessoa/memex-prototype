@@ -21,8 +21,7 @@
     <span class="author" *ngFor="let author of coAuthorsApproved">
       {{ author }}
     </span>
-    <span class="title" *ngIf="coAuthors && coAuthors.length > 0">Co-authors pending approval</span>
-    <span class="author" *ngFor="let author of coAuthors">
+    <span class="co-author" *ngFor="let author of coAuthors">
       {{ author }}
     </span>
   </div>
@@ -37,8 +36,8 @@
   <button mat-button class="floating-button" routerLink="/add-story" [state]="{ story: story }">
     Edit story <mat-icon>edit</mat-icon>
   </button>
-  <button mat-button class="floating-button-blue" routerLink="/journeys-list" [state]="{ story: story }">
-    Link to journey <mat-icon>link</mat-icon>
+  <button mat-button class="floating-button-blue" routerLink="/journeys" [state]="{ story: story }">
+    Link to journey <mat-icon>timeline</mat-icon>
   </button>
   <button mat-button class="floating-button-grey" (click)="deleteStoryPopup()">Delete <mat-icon>delete</mat-icon></button>
 </div>

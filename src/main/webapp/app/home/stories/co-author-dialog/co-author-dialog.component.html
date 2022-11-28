@@ -1,11 +1,47 @@
 <div mat-dialog-title class="d-flex justify-content-between title">
-  <span>
-    {{ data.title }}
-  </span>
+  <span #top> New co-author request: </span>
   <mat-icon mat-dialog-close>close</mat-icon>
 </div>
-<div *ngIf="data.body" class="content main-text-color" [innerHTML]="data.body.split('\n').join('<br>')"></div>
+<div *ngIf="data" class="content main-text-color">You have received a new co-authoring request to the following story:</div>
+<div class="background-story">
+  <div class="header">
+    <span class="title"> {{ data.story.title }}</span>
+    <span class="subtitle"> by {{ data.story.author }}</span>
+  </div>
+
+  <div class="story-content">
+    <div class="story-cover">
+      <img [src]="data.story.coverImage" />
+    </div>
+
+    <!--div class="story-cover" *ngFor="let media of selectedMedia">
+      <img [src]="media" />
+    </div-->
+
+    <div class="description">
+      {{ data.story.description }}
+    </div>
+
+    <div class="additional-authors">
+      <span class="title" *ngIf="coAuthorsApproved && coAuthorsApproved.length > 0">Co-authors</span>
+      <span class="author" *ngFor="let author of coAuthorsApproved">
+        {{ author }}
+      </span>
+      <span class="co-author" *ngFor="let author of coAuthors">
+        {{ author }}
+      </span>
+    </div>
+
+    <div class="tags">
+      <span class="title" *ngIf="tags && tags.length > 0">Tags</span>
+      <span class="tag" *ngFor="let tag of tags">
+        {{ tag }}
+      </span>
+    </div>
+  </div>
+</div>
+
 <div class="d-flex flex-auto justify-content-end mt-36px">
-  <button class="accent" mat-button color="secondary" (click)="closeDialog()">{{ data.cancelButton }}</button>
-  <button class="primary" mat-button type="submit" (click)="okButton()">{{ data.okButton }}</button>
+  <button class="accent" mat-button color="secondary" (click)="closeDialog()">Decline</button>
+  <button class="primary" mat-button type="submit" (click)="okButton()">Accept</button>
 </div>

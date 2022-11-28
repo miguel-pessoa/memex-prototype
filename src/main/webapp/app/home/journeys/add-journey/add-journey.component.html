@@ -11,8 +11,10 @@
 >
   <div class="step">
     <div class="cover-image">
-      <img *ngIf="journey.coverImage" />
-      <div class="add-cover-image" *ngIf="!journey.coverImage">
+      <img class="image" *ngIf="coverPicture" [src]="coverPicture" />
+      <mat-icon *ngIf="coverPicture" class="remove-image" (click)="coverPicture = ''">close </mat-icon>
+      <input type="file" class="file-input" (change)="onImageSelected($event)" #imageFileUpload />
+      <div class="add-cover-image" (click)="imageFileUpload.click()" *ngIf="!coverPicture">
         <mat-icon>add_photo_alternate</mat-icon>
         <br />
         Add cover image *

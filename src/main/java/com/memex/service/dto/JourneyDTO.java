@@ -15,7 +15,6 @@ public class JourneyDTO extends BaseCreateUpdateDTO {
     @Size(max = 2000)
     private String storiesIds;
 
-    @Size(max = 20000)
     private String coverImage;
 
     private Boolean ordered;
@@ -27,6 +26,17 @@ public class JourneyDTO extends BaseCreateUpdateDTO {
     private Instant createdDate;
 
     private Instant updatedDate;
+
+    @Size(max = 255)
+    private String author;
+
+    public void setAuthor(String author) {
+        this.author = author;
+    }
+
+    public String getAuthor() {
+        return author;
+    }
 
     public String getTitle() {
         return title;

@@ -21,6 +21,7 @@ export class ViewStoryComponent {
   public selectedMedia: string[] = [];
 
   constructor(private location: Location, private dialog: MatDialog, private router: Router, private storiesService: StoriesService) {
+    console.warn(this.router.getCurrentNavigation()?.extras.state);
     if (this.router.getCurrentNavigation()?.extras.state?.story) {
       this.story = this.router.getCurrentNavigation()?.extras.state?.story;
       this.coAuthors = this.story.coAuthors.split(';;');

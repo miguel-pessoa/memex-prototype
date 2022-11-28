@@ -8,7 +8,7 @@ import { UserProfileService } from './user-profile/user-profile.service';
 import { AccountService } from 'app/core/auth/account.service';
 import { Account } from 'app/core/auth/account.model';
 import { FormBuilder, FormControl, FormGroup } from '@angular/forms';
-import { toJSDate } from '@ng-bootstrap/ng-bootstrap/datepicker/ngb-calendar';
+import { CoAuthorDialogComponent } from './co-author-dialog/co-author-dialog.component';
 
 @Component({
   selector: 'jhi-stories',
@@ -45,10 +45,12 @@ export class StoriesComponent implements OnInit {
           this.userProfile = result;
         });
       }
+      this.account = account;
     });
 
     this.storiesService.findAll().subscribe(stories => {
       this.stories = stories;
+      this.coAuthorModal(this.stories[0]);
       this.selectFilter();
     });
   }
@@ -131,6 +133,25 @@ export class StoriesComponent implements OnInit {
           this.userService.create(this.userProfile).subscribe((resultProfile: UserProfile) => {
             this.userProfile = resultProfile;
           });
+        }
+      });
+  }
+
+  public coAuthorModal(story: Story): void {
+    this.dialog
+      .open(CoAuthorDialogComponent, {
+        data: {
+          story,
+        },
+        restoreFocus: false,
+        height: '500px',
+        width: '450px',
+        panelClass: ['mat-dialog-override'],
+      })
+      .afterClosed()
+      .subscribe((result: Story | null) => {
+        if (result) {
+          console.warn(result);
         }
       });
   }

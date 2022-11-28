@@ -3,6 +3,7 @@
 
 button {
   width: 120px;
+  font-weight: 600;
   &.accent {
     margin-left: 16px;
     color: #333;
@@ -15,9 +16,15 @@ button {
   }
 }
 
+.background-story {
+  background: lighten($primary, 52%);
+  border-radius: 4px;
+  padding: 0 6px;
+}
+
 .title {
   font-size: 18px;
-  margin-bottom: 24px;
+  margin-bottom: 5px;
 }
 
 .actions {
@@ -30,4 +37,86 @@ button {
 
 .actions {
   margin-top: 46px;
+}
+
+.header {
+  display: flex;
+  .title {
+    font-size: 20px;
+    font-weight: 600;
+    mat-icon {
+      vertical-align: text-top;
+    }
+  }
+  .subtitle {
+    font-size: 16px;
+    display: block;
+    margin-top: 5px;
+    margin-left: 8px;
+  }
+}
+
+.story-content {
+  .story-cover {
+    width: 100%;
+    margin: 10px 0;
+    border-radius: 4px;
+    img {
+      width: 100%;
+      border-radius: 4px;
+    }
+  }
+  .additional-authors {
+    .title {
+      margin-bottom: 4px;
+      margin-top: 10px;
+      display: block;
+      font-size: 16px;
+      font-weight: 600;
+    }
+    .author {
+      display: inline-block;
+      font-size: 16px;
+      padding: 5px 10px;
+      margin-right: 12px;
+      margin-bottom: 6px;
+      min-width: 65px;
+      text-align: center;
+      border: 1px solid lighten($primary, 35%);
+      border-radius: 26px;
+      color: #333;
+      font-weight: 600;
+      background-color: lighten($primary, 35%);
+      transition: all 0.2s;
+    }
+
+    .co-author {
+      @extend .author;
+      background-color: lighten($primary, 50%);
+    }
+  }
+  .tags {
+    .title {
+      margin-bottom: 4px;
+      margin-top: 10px;
+      display: block;
+      font-size: 16px;
+      font-weight: 600;
+    }
+    .tag {
+      display: inline-block;
+      font-size: 16px;
+      padding: 5px 10px;
+      margin-right: 12px;
+      margin-bottom: 6px;
+      min-width: 65px;
+      text-align: center;
+      border: 1px solid lighten($primary, 35%);
+      border-radius: 26px;
+      color: #333;
+      font-weight: 600;
+      background-color: lighten($primary, 35%);
+      transition: all 0.2s;
+    }
+  }
 }

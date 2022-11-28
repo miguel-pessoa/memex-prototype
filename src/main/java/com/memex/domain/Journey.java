@@ -31,8 +31,7 @@ public class Journey extends BaseDomain {
     @Column(name = "storys_ids", length = 2000)
     private String storiesIds;
 
-    @Size(max = 20000)
-    @Column(name = "cover_image", length = 20000)
+    @Column(name = "cover_image")
     private String coverImage;
 
     @Column(name = "published")
@@ -49,6 +48,18 @@ public class Journey extends BaseDomain {
 
     @Column(name = "updated_date")
     private Instant updatedDate;
+
+    @Size(max = 255)
+    @Column(name = "author", length = 255)
+    private String author;
+
+    public void setAuthor(String author) {
+        this.author = author;
+    }
+
+    public String getAuthor() {
+        return author;
+    }
 
     public String getTitle() {
         return title;

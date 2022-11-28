@@ -30,6 +30,21 @@
 
 .cover-image {
   .image {
+    margin-top: 10px;
+    width: 100%;
+    border-radius: 4px;
+  }
+
+  .remove-image {
+    position: absolute;
+    right: 10px;
+    margin-top: 15px;
+    background: $secondary;
+    color: #eee;
+    font-size: 20px;
+    padding-left: 2px;
+    line-height: 25px;
+    border-radius: 50%;
   }
   .add-cover-image {
     text-align: center;
@@ -49,6 +64,10 @@
   }
 }
 
+.file-input {
+  display: none;
+}
+
 .mat-button {
   float: right;
   background-color: $secondary;
@@ -56,6 +75,7 @@
   color: #eee;
   font-size: 16px;
   margin-top: 10px;
+  margin-right: -7px;
 }
 
 .color-select {
@@ -112,9 +132,9 @@
     }
   }
 
-  mat-form-field-outline {
+  .mat-form-field-outline {
     background: white !important;
-    border-radius: 4px;
+    border-radius: 6px;
     opacity: 1;
   }
 }

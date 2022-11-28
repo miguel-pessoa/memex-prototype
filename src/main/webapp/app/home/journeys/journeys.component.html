@@ -1,10 +1,18 @@
-<div class="header">
-  <span class="title"> Journeys</span>
-  <span class="filters"><mat-icon>filter_list</mat-icon></span>
-</div>
-
-<!-- FILTERS-->
-
-<jhi-journey *ngFor="let journey of journeys" [journey]="journey" (click)="linkStoryWithJourney(journey)"></jhi-journey>
-
-<button mat-button class="floating-button" routerLink="/add-journey">Create <mat-icon>add</mat-icon></button>
+<mat-sidenav-container class="example-container">
+  <mat-sidenav mode="over" [(opened)]="filters">
+    <span class="title">Journey filters:</span>
+    <mat-checkbox [(ngModel)]="myJourneys" (change)="selectFilter()">My stories</mat-checkbox>
+    <mat-checkbox [(ngModel)]="recentJourneys" (change)="selectFilter()">Recently added</mat-checkbox>
+    <mat-checkbox (change)="selectFilter()">TODO</mat-checkbox>
+  </mat-sidenav>
+  <mat-sidenav-content>
+    <button mat-button class="floating-button" routerLink="/add-journey">Create <mat-icon>add</mat-icon></button>
+    <div class="header">
+      <span class="title">Journeys</span>
+      <span class="filters" (click)="toggleFilters()"><mat-icon>filter_list</mat-icon></span>
+    </div>
+    <div class="stories-padding">
+      <jhi-journey (click)="linkStory(journey, $event)" *ngFor="let journey of displayedJourneys" [journey]="journey"></jhi-journey>
+    </div>
+  </mat-sidenav-content>
+</mat-sidenav-container>

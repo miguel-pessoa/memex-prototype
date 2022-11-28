@@ -39,6 +39,7 @@
             <column  name="id" type="BIGINT">
                 <constraints primaryKey="true" primaryKeyName="journey_id"/>
             </column>
+            <column name="author" type="varchar(255)"/>
             <column name="title" type="varchar(255)"/>
             <column name="description" type="varchar(2000)"/>
             <column name="cover_image" type="text"/>

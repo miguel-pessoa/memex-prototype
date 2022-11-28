@@ -1,18 +1,18 @@
 <div class="journey" [routerLink]="'/journey/' + journey.id">
   <div class="journey-image">
-    <img />
+    <img [src]="journey.coverImage" />
   </div>
   <div class="journey-text">
     <span class="title">{{ journey.title }}</span>
     <br />
     <div class="bottom">
       <span class="author">
-        <span class="authorPic"></span>
-        <span class="authorText">{{ journey }}</span>
+        <img class="authorPic" [src]="userImage" />
+        <span class="authorText">{{ journey.title }}</span> <span>by {{ journey.author }}</span>
       </span>
-      <span *ngIf="journey.stories.length > 1">{{ 'and ' + journey.stories.length + 'others' }} </span>
-      <span *ngIf="journey.stories.length === 1">{{ 'and ' + journey.stories.length + 'other' }} </span>
-      <span class="date">{{ journey.date }}</span>
+      <span *ngIf="journey.stories && journey.stories.length > 1">&nbsp;&nbsp; {{ journey.stories.length + 'stories' }} </span>
+      <span *ngIf="journey.stories && journey.stories.length === 1">&nbsp;&nbsp; {{ journey.stories.length + 'story' }} </span>
+      <span class="date">{{ returnDate(journey.createdDate) }}</span>
     </div>
   </div>
 </div>

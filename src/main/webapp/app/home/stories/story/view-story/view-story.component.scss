@@ -52,6 +52,11 @@
       background-color: lighten($primary, 35%);
       transition: all 0.2s;
     }
+
+    .co-author {
+      @extend .author;
+      background-color: lighten($primary, 50%);
+    }
   }
   .tags {
     .title {

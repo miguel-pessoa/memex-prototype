@@ -135,7 +135,7 @@ export class AddStoryComponent implements OnInit {
       //this.filesService.create(this.coverPicture).subscribe((result: string) => {
       //  console.warn('file');
       //  console.warn(result);
-      this.router.navigate(['/']);
+      this.router.navigate(['/story/'.concat(story.id.toString())], { state: { story } });
       // });
     });
   }
