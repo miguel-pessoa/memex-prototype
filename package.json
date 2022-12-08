@@ -50,7 +50,7 @@
     "prepare": "husky install",
     "prettier:check": "prettier --check \"{,src/**/,webpack/}*.{md,json,yml,html,cjs,mjs,js,ts,tsx,css,scss,java}\"",
     "prettier:format": "prettier --write \"{,src/**/,webpack/}*.{md,json,yml,html,cjs,mjs,js,ts,tsx,css,scss,java}\"",
-    "rimraf": "./node_modules/rimraf/bin.js",
+    "rimraf": "npm i -g rimraf",
     "serve": "npm run start --",
     "start": "ng serve --hmr",
     "start-tls": "npm run webapp:dev-ssl",
