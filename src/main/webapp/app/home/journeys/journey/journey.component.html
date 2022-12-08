@@ -1,4 +1,4 @@
-<div class="journey" [routerLink]="'/journey/' + journey.id">
+<div class="journey" [routerLink]="'/journey/' + journey.id" [state]="{ story: storyToLink, journey: journey }">
   <div class="journey-image">
     <img [src]="journey.coverImage" />
   </div>
@@ -8,10 +8,11 @@
     <div class="bottom">
       <span class="author">
         <img class="authorPic" [src]="userImage" />
-        <span class="authorText">{{ journey.title }}</span> <span>by {{ journey.author }}</span>
+        <span class="authorText">by {{ journey.author }}</span>
+        <span *ngIf="stories && stories.length > 1">&nbsp;&nbsp; {{ stories.length + ' stories' }} </span>
+        <span *ngIf="stories && stories.length === 1">&nbsp;&nbsp; {{ stories.length + ' story' }} </span>
       </span>
-      <span *ngIf="journey.stories && journey.stories.length > 1">&nbsp;&nbsp; {{ journey.stories.length + 'stories' }} </span>
-      <span *ngIf="journey.stories && journey.stories.length === 1">&nbsp;&nbsp; {{ journey.stories.length + 'story' }} </span>
+
       <span class="date">{{ returnDate(journey.createdDate) }}</span>
     </div>
   </div>

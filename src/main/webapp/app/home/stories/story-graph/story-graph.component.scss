@@ -1,3 +1,7 @@
+@import '~bootstrap/scss/functions';
+@import '../../../../content/scss/_variables';
+@import '../../../../content/scss/_bootstrap-variables';
+
 .graphBox {
   height: calc(100vh - 135px);
 }
@@ -5,20 +9,27 @@
 :host ::ng-deep {
   .scene-nav-info,
   .scene-tooltip {
-    color: black;
+    color: #333;
+    text-shadow: 0.5px 0.5px white;
+    background: #eeeeeebb;
+    border-radius: 4px;
+    padding: 0 10px;
+    user-select: none;
   }
 }
 
 .header {
   display: flex;
   justify-content: space-between;
+  margin-top: -15px;
+  margin-bottom: 5px;
   .title {
     font-size: 18px;
     font-weight: 600;
     mat-icon {
-      font-size: 24px;
+      font-size: 16px;
       font-weight: 200;
-      vertical-align: sub;
+      line-height: 24px;
     }
   }
   .icon {

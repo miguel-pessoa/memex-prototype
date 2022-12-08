@@ -37,7 +37,7 @@
 
   .remove-image {
     position: absolute;
-    right: 10px;
+    right: 18px;
     margin-top: 15px;
     background: $secondary;
     color: #eee;
@@ -88,24 +88,24 @@
     height: 35px;
     border-radius: 25px;
     &.color1 {
-      background-color: lighten($primary, 10%);
+      background-color: lighten($primary, 30%);
       border: 2px solid $primary;
     }
     &.color2 {
-      background-color: lighten(rgb(255, 255, 117), 10%);
-      border: 2px solid rgb(255, 255, 117);
+      background-color: lighten(#e6dd89, 10%);
+      border: 2px solid #e6dd89;
     }
-    &.color3 {
-      background-color: lighten($secondary, 10%);
+    &.color5 {
+      background-color: lighten($secondary, 20%);
       border: 2px solid $secondary;
     }
     &.color4 {
-      background-color: lighten(rgb(82, 207, 82), 10%);
-      border: 2px solid rgb(82, 207, 82);
+      background-color: lighten(#a0dd92, 10%);
+      border: 2px solid #a0dd92;
     }
-    &.color5 {
-      background-color: lighten(rgb(255, 0, 157), 10%);
-      border: 2px solid rgb(255, 0, 157);
+    &.color3 {
+      background-color: lighten(#eac2e3, 10%);
+      border: 2px solid #eac2e3;
     }
   }
 }
@@ -144,22 +144,22 @@
   border-radius: 4px;
   &.color1 {
     background-color: lighten($primary, 40%);
-    border: 2px solid $primary;
+    border: 2px solid lighten($primary, 20%);
   }
   &.color2 {
-    background-color: lighten(rgb(255, 255, 117), 20%);
-    border: 2px solid rgb(255, 255, 117);
+    background-color: lighten(#e6dd89, 20%);
+    border: 2px solid #e6dd89;
   }
-  &.color3 {
+  &.color5 {
     background-color: lighten($secondary, 30%);
     border: 2px solid $secondary;
   }
   &.color4 {
-    background-color: lighten(rgb(82, 207, 82), 30%);
-    border: 2px solid rgb(82, 207, 82);
+    background-color: lighten(#a0dd92, 20%);
+    border: 2px solid #a0dd92;
   }
-  &.color5 {
-    background-color: lighten(rgb(255, 0, 157), 40%);
-    border: 2px solid rgb(255, 0, 157);
+  &.color3 {
+    background-color: lighten(#eac2e3, 10%);
+    border: 2px solid #eac2e3;
   }
 }

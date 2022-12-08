@@ -24,8 +24,19 @@ export class AddStoryComponent implements OnInit {
   public account: Account | null = null;
 
   public tags = [
+    'Heritage',
+    'Tradition',
+    'Crafts',
     'Historic event',
     'Art',
+    'Mural',
+    'Statue',
+    'Memorial',
+    'Sport',
+    'Religion',
+    'Activism',
+    'School',
+    'Work',
     'Nature',
     'Music and dance',
     'Food',
@@ -34,13 +45,15 @@ export class AddStoryComponent implements OnInit {
     'Human & civil rights',
     'Museum',
     'Life event',
+    'Relationship',
   ];
   public selectedTags: string[] = [];
   public selectedAuthors: string[] = [];
   public selectedMedia: string[] = [];
   public coverPicture = '';
   public form: FormGroup = this.formBuilder.group({
-    coAuthor: new FormControl('', [Validators.required]),
+    location: new FormControl('', [Validators.required]),
+    coAuthor: new FormControl(''),
     title: new FormControl('', [Validators.required]),
     description: new FormControl('', [Validators.required]),
   });
@@ -56,7 +69,8 @@ export class AddStoryComponent implements OnInit {
     if (this.router.getCurrentNavigation()?.extras.state?.story) {
       this.story = this.router.getCurrentNavigation()?.extras.state?.story;
       this.form = this.formBuilder.group({
-        coAuthor: new FormControl('', [Validators.required]),
+        location: new FormControl('', [Validators.required]),
+        coAuthor: new FormControl(''),
         title: new FormControl(this.story.title, [Validators.required]),
         description: new FormControl(this.story.description, [Validators.required]),
       });
@@ -127,8 +141,10 @@ export class AddStoryComponent implements OnInit {
     this.story.addCoverImage9 = this.selectedMedia.length > 8 ? this.selectedMedia[8] : '';
     this.story.addCoverImage10 = this.selectedMedia.length > 9 ? this.selectedMedia[9] : '';
     this.story.coverImage = this.coverPicture;
-    //this.story.tags = this.;
+    this.story.tags = this.arrayToString(this.selectedTags);
+    this.story.coAuthors = this.arrayToString(this.selectedAuthors);
     this.story.title = this.titleFormControl.value;
+    this.story.location = this.locationFormControl.value;
     this.story.description = this.descriptionFormControl.value;
     this.storiesService.create(this.story).subscribe((story: Story) => {
       console.warn(story);
@@ -204,6 +220,7 @@ export class AddStoryComponent implements OnInit {
       console.warn(value);
       if (this.selectedAuthors.indexOf(value) === -1 && value) {
         this.selectedAuthors.push(value);
+        this.authorsFormControl.setValue('');
       }
     }
     this.story.coAuthors = this.arrayToString(this.selectedAuthors);
@@ -226,19 +243,19 @@ export class AddStoryComponent implements OnInit {
   }
 
   public arrayToString(array: string[]): string {
-    const result = '';
-    array.forEach((a: string) => {
-      result.concat(a, ';;');
-    });
-    return result;
+    return array.join(';;');
   }
 
   public stringToArray(strin: string): string[] {
-    return strin.split(';;');
+    return strin ? strin.split(';;') : [];
   }
 
   get titleFormControl(): FormControl {
     return this.form.get('title') as FormControl;
+  }
+
+  get locationFormControl(): FormControl {
+    return this.form.get('location') as FormControl;
   }
 
   get descriptionFormControl(): FormControl {

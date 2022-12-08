@@ -25,7 +25,7 @@
       [id]="id"
       (blur)="updateIfCurrency()"
     />
-    <mat-error *ngIf="control.touched && control.errors?.required">{{ 'common.error.mandatory' | translate }}</mat-error>
+    <mat-error *ngIf="control.touched && control.errors?.required">{{ 'error.mandatory' | translate }}</mat-error>
     <mat-error *ngIf="control.touched && !control.errors?.required && (control.errors?.invalid || control.errors?.email)">{{
       'common.error.invalid' | translate
     }}</mat-error>
@@ -34,7 +34,7 @@
   <div *ngIf="type === 'datepicker'" class="datepicker">
     <input matInput [matDatepicker]="picker" [formControl]="control" [errorStateMatcher]="matcher" [(ngModel)]="model" #dateInput />
     <mat-error *ngIf="control.touched && !(control.errors?.invalid || control.errors?.matDatepickerParse) && control.errors?.required">{{
-      'common.error.mandatory' | translate
+      'error.mandatory' | translate
     }}</mat-error>
     <mat-error *ngIf="control.touched && (control.errors?.invalid || control.errors?.matDatepickerParse)">{{
       'common.error.invalid' | translate

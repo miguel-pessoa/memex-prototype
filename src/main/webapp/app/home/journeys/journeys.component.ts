@@ -41,48 +41,19 @@ export class JourneysComponent {
     this.accountService.getAuthenticationState().subscribe(account => (this.account = account));
 
     this.journeyService.findAll().subscribe(journeys => {
+      const journeysWithDate: Journey[] = [];
+      journeys.forEach(journey => {
+        if (!journey.createdDate) {
+          const date = new Date();
+          date.setDate(date.getDate() - Math.round(Math.random() * 5));
+          journey.createdDate = date.toLocaleDateString('pt-PT');
+        }
+        journeysWithDate.push(journey);
+      });
+      this.journeys = journeysWithDate;
       this.journeys = journeys;
       this.selectFilter();
     });
-  }
-
-  public linkStory(journey: Journey, event: MouseEvent): void {
-    if (this.storyToLink) {
-      event.stopPropagation();
-      this.linkJourneyWithJourney(journey);
-    }
-  }
-
-  public linkJourneyWithJourney(journey: Journey): void {
-    this.dialog
-      .open(ConfirmDialogComponent, {
-        data: {
-          title: 'Link journey with selected journey?',
-          body: "You can edit the journeys linked in the journey's page",
-          cancelButton: 'Cancel',
-          okButton: 'Link',
-          hasCancel: true,
-        },
-        restoreFocus: false,
-        height: '200px',
-        width: '450px',
-        panelClass: ['mat-dialog-override'],
-      })
-      .afterClosed()
-      .subscribe((result: boolean) => {
-        if (result && this.storyToLink) {
-          if (journey.stories) {
-            journey.stories.concat(this.storyToLink.id.toString());
-          } else {
-            journey.stories = this.storyToLink.id.toString();
-          }
-          this.journeyService.update(journey).subscribe((resultJourney: Journey) => {
-            console.warn(resultJourney);
-            this.router.navigate(['/story/'.concat(this.storyToLink?.id ? this.storyToLink.id.toString() : '')]);
-            this.storyToLink = undefined;
-          });
-        }
-      });
   }
 
   public toggleFilters(): void {

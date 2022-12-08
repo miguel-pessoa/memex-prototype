@@ -35,7 +35,19 @@ export class AddJourneyComponent implements OnInit {
     private accountService: AccountService,
     private formBuilder: FormBuilder,
     private dialog: MatDialog
-  ) {}
+  ) {
+    if (this.router.getCurrentNavigation()?.extras.state?.journey) {
+      this.journey = this.router.getCurrentNavigation()?.extras.state?.journey;
+      this.form = this.formBuilder.group({
+        title: new FormControl(this.journey.title, [Validators.required]),
+        description: new FormControl(this.journey.description, [Validators.required]),
+      });
+      this.coverPicture = this.journey.coverImage;
+      this.selectedColor = this.journey.color;
+      this.selectedColorClass = 'color'.concat(this.journey.color.toString());
+      this.stepCount = 3;
+    }
+  }
 
   public ngOnInit(): void {
     this.accountService.getAuthenticationState().subscribe(account => (this.account = account));
@@ -75,6 +87,9 @@ export class AddJourneyComponent implements OnInit {
   public publish(): void {
     if (this.account) {
       this.journey.author = this.account.login;
+    }
+    if (this.journey.createdDate.indexOf('T') === -1) {
+      this.journey.createdDate = '';
     }
     this.journey.coverImage = this.coverPicture;
     this.journey.title = this.titleFormControl.value;

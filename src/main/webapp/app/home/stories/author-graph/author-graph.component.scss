@@ -12,13 +12,15 @@
 .header {
   display: flex;
   justify-content: space-between;
+  margin-top: -15px;
+  margin-bottom: 5px;
   .title {
     font-size: 18px;
     font-weight: 600;
     mat-icon {
-      font-size: 24px;
+      font-size: 16px;
       font-weight: 200;
-      vertical-align: sub;
+      line-height: 24px;
     }
   }
   .icon {

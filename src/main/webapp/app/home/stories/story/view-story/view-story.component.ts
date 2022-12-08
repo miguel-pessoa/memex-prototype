@@ -5,6 +5,7 @@ import { Router } from '@angular/router';
 import { MatDialog } from '@angular/material/dialog';
 import { ConfirmDialogComponent } from 'app/shared/components/confirm-dialog/confirm-dialog.component';
 import { StoriesService } from '../../stories.service';
+import { AccountService } from 'app/core/auth/account.service';
 
 @Component({
   selector: 'jhi-view-story',
@@ -15,18 +16,25 @@ export class ViewStoryComponent {
   @Input()
   public story: Story = new Story();
 
+  public canEdit = false;
   public tags: string[] = [];
   public coAuthors: string[] = [];
   public coAuthorsApproved: string[] = [];
   public selectedMedia: string[] = [];
 
-  constructor(private location: Location, private dialog: MatDialog, private router: Router, private storiesService: StoriesService) {
+  constructor(
+    private location: Location,
+    private dialog: MatDialog,
+    private router: Router,
+    private accountService: AccountService,
+    private storiesService: StoriesService
+  ) {
     console.warn(this.router.getCurrentNavigation()?.extras.state);
     if (this.router.getCurrentNavigation()?.extras.state?.story) {
       this.story = this.router.getCurrentNavigation()?.extras.state?.story;
-      this.coAuthors = this.story.coAuthors.split(';;');
-      this.coAuthorsApproved = this.story.coAuthorsApproved.split(';;');
-      this.tags = this.story.tags.split(';;');
+      this.coAuthors = this.story.coAuthors ? this.story.coAuthors.split(';;') : [];
+      this.coAuthorsApproved = this.story.coAuthorsApproved ? this.story.coAuthorsApproved.split(';;') : [];
+      this.tags = this.story.tags ? this.story.tags.split(';;') : [];
       if (this.story.addCoverImage1) {
         this.selectedMedia.push(this.story.addCoverImage1);
       }
@@ -57,11 +65,18 @@ export class ViewStoryComponent {
       if (this.story.addCoverImage10) {
         this.selectedMedia.push(this.story.addCoverImage10);
       }
+      this.accountService.getAuthenticationState().subscribe(result => {
+        this.canEdit = this.story.author === result?.login;
+      });
     }
   }
 
   public goBack(): void {
     this.location.back();
+  }
+
+  public returnDate(date: string): string {
+    return date ? date.split('T')[0] : '';
   }
 
   public deleteStoryPopup(): void {

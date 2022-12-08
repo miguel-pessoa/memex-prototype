@@ -1,3 +1,7 @@
+@import '~bootstrap/scss/functions';
+@import '../../../../../content/scss/_variables';
+@import '../../../../../content/scss/_bootstrap-variables';
+
 .header {
   display: flex;
   .title {
@@ -6,5 +10,47 @@
     mat-icon {
       vertical-align: text-top;
     }
+  }
+  .subtitle {
+    font-size: 16px;
+    display: inline-block;
+    margin-top: 5px;
+    margin-left: 8px;
+  }
+}
+.journey-content {
+  border-radius: 4px;
+  padding-bottom: 10px;
+  .description {
+    margin: 0 10px;
+  }
+  .journey-cover {
+    width: 100%;
+    padding: 10px;
+    border-radius: 4px;
+    img {
+      width: 100%;
+      border-radius: 4px;
+    }
+  }
+  &.color1 {
+    background-color: lighten($primary, 45%);
+    border: 2px solid lighten($primary, 20%);
+  }
+  &.color2 {
+    background-color: lighten(#e6dd89, 20%);
+    border: 2px solid #e6dd89;
+  }
+  &.color5 {
+    background-color: lighten($secondary, 30%);
+    border: 2px solid $secondary;
+  }
+  &.color4 {
+    background-color: lighten(#a0dd92, 20%);
+    border: 2px solid #a0dd92;
+  }
+  &.color3 {
+    background-color: lighten(#eac2e3, 10%);
+    border: 2px solid #eac2e3;
   }
 }

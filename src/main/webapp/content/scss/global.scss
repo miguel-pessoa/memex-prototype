@@ -215,7 +215,7 @@ ui bootstrap tweaks
   @extend .floating-button;
   background-color: $primary;
   border-color: lighten($primary, 10%);
-  bottom: 110px;
+  bottom: 65px;
   &:hover {
     background-color: lighten($primary, 5%);
   }
@@ -229,7 +229,7 @@ ui bootstrap tweaks
   @extend .floating-button;
   background-color: #888;
   border-color: lighten(#888, 10%);
-  bottom: 65px;
+  bottom: 110px;
   &:hover {
     background-color: lighten(#888, 5%);
   }
@@ -248,4 +248,5 @@ ui bootstrap tweaks
 
 mat-icon {
   font-family: 'Material Icons';
+  font-weight: 100 !important;
 }

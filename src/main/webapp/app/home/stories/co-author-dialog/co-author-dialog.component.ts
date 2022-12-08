@@ -15,9 +15,9 @@ export class CoAuthorDialogComponent implements AfterViewInit {
   public selectedMedia: string[] = [];
 
   constructor(@Inject(MAT_DIALOG_DATA) public data: CoAuthorDialogData, public dialog: MatDialogRef<CoAuthorDialogComponent>) {
-    this.coAuthors = data.story.coAuthors.split(';;');
-    this.coAuthorsApproved = data.story.coAuthorsApproved.split(';;');
-    this.tags = data.story.tags.split(';;');
+    this.coAuthors = data.story.coAuthors ? data.story.coAuthors.split(';;') : [];
+    this.coAuthorsApproved = data.story.coAuthorsApproved ? data.story.coAuthorsApproved.split(';;') : [];
+    this.tags = data.story.tags ? data.story.tags.split(';;') : [];
     if (data.story.addCoverImage1) {
       this.selectedMedia.push(data.story.addCoverImage1);
     }

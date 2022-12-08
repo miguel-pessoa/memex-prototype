@@ -1,9 +1,36 @@
 <div class="header">
   <span class="title"> <mat-icon>arrow_back</mat-icon> {{ journey.title }}</span>
+  <span class="subtitle">by {{ journey.author }}</span>
 </div>
 
-<div class="journey-content">
+<div
+  class="journey-content"
+  [ngClass]="{
+    color1: journey.color === 1,
+    color2: journey.color === 2,
+    color3: journey.color === 3,
+    color4: journey.color === 4,
+    color5: journey.color === 5
+  }"
+>
   <div class="journey-cover">
-    <img />
+    <img [src]="journey.coverImage" />
   </div>
+
+  <div class="description">
+    {{ journey.description }}
+    <br />
+    <span style="font-size: 12px">
+      {{ 'Created on ' + returnDate(journey.createdDate) }}
+    </span>
+  </div>
+
+  <div style="padding: 0 10px">
+    <jhi-story *ngFor="let story of storiesInJourney" [story]="story"></jhi-story>
+  </div>
+
+  <button *ngIf="canEdit" mat-button class="floating-button" routerLink="/add-journey" [state]="{ journey: journey }">
+    Edit story <mat-icon>edit</mat-icon>
+  </button>
+  <button *ngIf="canEdit" mat-button class="floating-button-grey" (click)="deleteJourneyPopup()">Delete <mat-icon>delete</mat-icon></button>
 </div>

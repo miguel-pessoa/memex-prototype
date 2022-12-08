@@ -5,15 +5,23 @@ import * as THREE from 'three';
 import { StoriesService } from '../stories.service';
 import { GraphInfoDialogComponent } from './graph-info-dialog/graph-info-dialog.component';
 import { MatDialog } from '@angular/material/dialog';
+import { Story } from '../story/story.model';
+import { UserProfileService } from '../user-profile/user-profile.service';
+import { UserProfile } from '../user-profile/user-profile.model';
+import { AccountService } from 'app/core/auth/account.service';
+import { Account } from 'app/core/auth/account.model';
+import { Router } from '@angular/router';
 
 interface Node {
   id: number;
   name: string;
+  image: string;
 }
 
 interface Author {
   name: string;
-  coAuthors: Author[];
+  image: string;
+  coAuthors: string[];
 }
 
 interface Link {
@@ -27,33 +35,17 @@ interface Link {
   templateUrl: './author-graph.component.html',
   styleUrls: ['./author-graph.component.scss'],
 })
-export class AuthorGraphComponent implements AfterViewInit {
+export class AuthorGraphComponent {
   @ViewChild('graphDiv') graphDiv!: ElementRef;
+  public selectedNode: Node | undefined = undefined;
   private graph!: ForceGraph3DInstance;
 
   private nodeId = 0;
-  private authors = [
-    {
-      name: 'author1',
-      coAuthors: [
-        {
-          name: 'author6',
-          coAuthors: [
-            { name: 'author8', coAuthors: [] },
-            { name: 'author9', coAuthors: [] },
-          ],
-        },
-        { name: 'author7', coAuthors: [{ name: 'author9', coAuthors: [] }] },
-        {
-          name: 'author2',
-          coAuthors: [
-            { name: 'author3', coAuthors: [{ name: 'author4', coAuthors: [] }] },
-            { name: 'author4', coAuthors: [] },
-          ],
-        },
-      ],
-    },
-  ];
+  private stories: Story[] = [];
+  private account: Account | null = null;
+  private userProfiles: UserProfile[] = [];
+  private addedUsers: string[] = [];
+  private authors: Author[] = [];
 
   // private nodes: Node[] = Array.from(Array(this.samples)).map((_, idx) => ({ id: idx, name:"" }));
   // private links: Link[] = this.nodes.filter(({id}) => id > 0).map(({id}) =>
@@ -72,27 +64,92 @@ export class AuthorGraphComponent implements AfterViewInit {
     links: this.links,
   };
 
-  constructor(private elementRef: ElementRef, private dialog: MatDialog, private storyService: StoriesService) {
+  constructor(
+    private elementRef: ElementRef,
+    private dialog: MatDialog,
+    private router: Router,
+    private storyService: StoriesService,
+    private accountService: AccountService,
+    private userProfileService: UserProfileService
+  ) {
+    this.accountService.getAuthenticationState().subscribe(account => {
+      this.account = account;
+      this.storyService.findAll().subscribe((stories: Story[]) => {
+        this.stories = stories;
+        this.userProfileService.findAll().subscribe((userProfiles: UserProfile[]) => {
+          this.userProfiles = userProfiles;
+          this.createAuthors();
+        });
+      });
+    });
+
     // console.log(this.gData);
   }
 
-  ngAfterViewInit(): void {
-    this.generateData(this.nodes, this.links, this.authors, 0);
-    console.warn(this.gData);
+  public createAuthors(): void {
+    this.stories.forEach((story: Story) => {
+      if (this.authors.filter((author: Author) => story.author === author.name).length === 0) {
+        const loggedUserProfile: UserProfile = this.userProfiles.filter((u: UserProfile) => u.username === story.author)[0];
+        const newAuthor: Author = { name: story.author, image: loggedUserProfile.coverImage, coAuthors: [] };
+        if (story.coAuthorsApproved) {
+          story.coAuthorsApproved.split(';;').forEach((coAuthor: string) => {
+            if (newAuthor.coAuthors.indexOf(coAuthor) === -1) {
+              newAuthor.coAuthors.push(coAuthor);
+            }
+          });
+        }
+        this.authors.push(newAuthor);
+      } else {
+        const author = this.authors.filter((b: Author) => story.author === b.name)[0];
+        if (story.coAuthorsApproved) {
+          story.coAuthorsApproved.split(';;').forEach((coAuthor: string) => {
+            if (author.coAuthors.indexOf(coAuthor) === -1) {
+              author.coAuthors.push(coAuthor);
+            }
+          });
+        }
+      }
+    });
+    this.generateData(this.nodes, this.links, [], 0);
+  }
+
+  ready(): void {
     this.graph = ForceGraph3D()(this.htmlElement);
     this.graph.backgroundColor('white');
     this.graph.linkColor((group: any) => (group ? '#000' : '#222'));
     this.graph.nodeColor((group: any) => (group ? '#FF5738' : '#7fd8fe'));
     this.graph.nodeThreeObject(node => {
-      const map = new THREE.TextureLoader().load(this.storyService.getImageStory());
+      const map = new THREE.TextureLoader().load((node as Node).image);
       map.minFilter = THREE.LinearFilter;
       const material = new THREE.SpriteMaterial({ map });
       const sprite = new THREE.Sprite(material);
       sprite.scale.set(32, 32, 1);
       return sprite;
     });
+    this.graph.onNodeClick((node: any) => {
+      // Aim at node from outside it
+
+      if (this.selectedNode === node) {
+        this.router.navigate(['/'], { state: { coAuthorsFilter: node.name } });
+      }
+      this.selectedNode = node;
+
+      const distance = 100;
+      const distRatio = 1 + distance / Math.hypot(node.x, node.y, node.z);
+
+      const newPos =
+        node.x || node.y || node.z ? { x: node.x * distRatio, y: node.y * distRatio, z: node.z * distRatio } : { x: 0, y: 0, z: distance }; // special case if node is in (0,0,0)
+      console.warn(node);
+
+      this.graph.cameraPosition(
+        newPos, // new position
+        node, // lookAt ({ x, y, z })
+        1000 // ms transition duration
+      );
+      //this.graph.zoomToFit(1000, 10, (aNode) => aNode === node);
+    });
     this.graph.linkWidth((group: any) => (group ? 2 : 10));
-    this.graph.d3Force('link')?.distance((group: any) => 20);
+    this.graph.d3Force('link')?.distance((group: any) => 70);
     this.graph.graphData(this.gData);
     this.windowResize();
   }
@@ -123,27 +180,24 @@ export class AuthorGraphComponent implements AfterViewInit {
     return this.graphDiv.nativeElement as HTMLElement;
   }
 
-  private generateData(nodes: Node[], links: Link[], data: Author[], linkTo: number): void {
-    data.forEach(author => {
-      const repeated = nodes.filter((a: Node) => a.name === author.name).length !== 0;
-      let newNode: Node;
-      if (repeated) {
-        nodes.forEach((node: Node) => {
-          if (node.name === author.name) {
-            newNode = node;
-          }
-        });
-      } else {
-        this.nodeId++;
-        newNode = { id: this.nodeId, name: author.name };
-        nodes.push(newNode);
-      }
-      if (linkTo) {
-        this.links.push({ source: newNode!.id, target: linkTo, group: 1 });
-      }
-      if (author.coAuthors.length !== 0) {
-        this.generateData(nodes, links, author.coAuthors, this.nodeId);
-      }
+  private generateData(nodes: Node[], links: Link[], data: string[], linkTo: number): void {
+    this.authors.forEach(author => {
+      this.nodeId++;
+      nodes.push({ id: this.nodeId, image: author.image, name: author.name });
     });
+    console.warn(this.nodes);
+    this.authors.forEach(author => {
+      const authorNode: Node = this.nodes.filter(node => node.name === author.name)[0];
+
+      author.coAuthors.forEach(coAuthor => {
+        console.warn(coAuthor);
+        if (this.nodes.filter(node => node.name === coAuthor).length === 1) {
+          const coAuthorNode: Node = this.nodes.filter(node => node.name === coAuthor)[0];
+          this.links.push({ source: authorNode.id, target: coAuthorNode.id, group: 1 });
+        }
+      });
+    });
+    console.warn(this.links);
+    this.ready();
   }
 }

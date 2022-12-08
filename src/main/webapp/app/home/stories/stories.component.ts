@@ -9,6 +9,7 @@ import { AccountService } from 'app/core/auth/account.service';
 import { Account } from 'app/core/auth/account.model';
 import { FormBuilder, FormControl, FormGroup } from '@angular/forms';
 import { CoAuthorDialogComponent } from './co-author-dialog/co-author-dialog.component';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'jhi-stories',
@@ -35,8 +36,13 @@ export class StoriesComponent implements OnInit {
     private dialog: MatDialog,
     private accountService: AccountService,
     private formBuilder: FormBuilder,
+    private router: Router,
     private userService: UserProfileService
-  ) {}
+  ) {
+    if (this.router.getCurrentNavigation()?.extras.state?.coAuthorsFilter) {
+      this.coAuthorsFilter.push(this.router.getCurrentNavigation()?.extras.state?.coAuthorsFilter);
+    }
+  }
 
   ngOnInit(): void {
     this.accountService.getAuthenticationState().subscribe(account => {
@@ -49,8 +55,23 @@ export class StoriesComponent implements OnInit {
     });
 
     this.storiesService.findAll().subscribe(stories => {
-      this.stories = stories;
-      this.coAuthorModal(this.stories[0]);
+      const storiesWDate: Story[] = [];
+      stories.forEach(story => {
+        if (!story.createdDate) {
+          const date = new Date();
+          date.setDate(date.getDate() - Math.round(Math.random() * 5));
+          story.createdDate = date.toLocaleDateString('pt-PT');
+        }
+        storiesWDate.push(story);
+      });
+      this.stories = storiesWDate;
+      this.stories.forEach(story => {
+        const coAuthors = story.coAuthors ? story.coAuthors.split(';;') : [];
+        if (coAuthors.includes(this.account!.login)) {
+          this.coAuthorModal(story);
+        }
+      });
+      //this.coAuthorModal(this.stories[0]);
       this.selectFilter();
     });
   }
@@ -80,7 +101,9 @@ export class StoriesComponent implements OnInit {
       this.displayedStories = this.displayedStories.filter((story: Story) => this.coAuthorsFilter.indexOf(story.author) !== -1);
     }
     if (this.tagsFilter.length !== 0) {
-      this.displayedStories = this.displayedStories.filter((story: Story) => this.tagsFilter.indexOf(story.author) !== -1);
+      this.displayedStories = this.displayedStories.filter(
+        (story: Story) => this.tagsFilter.filter(tag => story.tags.split(';;').includes(tag)).length !== 0
+      );
     }
   }
 
@@ -149,8 +172,17 @@ export class StoriesComponent implements OnInit {
         panelClass: ['mat-dialog-override'],
       })
       .afterClosed()
-      .subscribe((result: Story | null) => {
+      .subscribe((result: boolean | null) => {
+        console.warn(result);
         if (result) {
+          story.coAuthors = story.coAuthors.replace(this.account!.login, '');
+          story.coAuthors = story.coAuthors.replace(';;;;', ';;');
+          if (!story.coAuthorsApproved) {
+            story.coAuthorsApproved = this.account!.login;
+          } else {
+            story.coAuthorsApproved = story.coAuthorsApproved.concat(';;'.concat(this.account!.login));
+          }
+          this.storiesService.update(story).subscribe(_ => console.warn('updated'));
           console.warn(result);
         }
       });

@@ -14,10 +14,14 @@
 
   <div class="description">
     {{ story.description }}
+    <br />
+    <span style="font-size: 12px">
+      {{ 'created on ' + returnDate(story.createdDate) }}
+    </span>
   </div>
 
   <div class="additional-authors">
-    <span class="title" *ngIf="coAuthorsApproved && coAuthorsApproved.length > 0">Co-authors</span>
+    <span class="title" *ngIf="(coAuthorsApproved && coAuthorsApproved.length > 0) || (coAuthors && coAuthors.length > 0)">Co-authors</span>
     <span class="author" *ngFor="let author of coAuthorsApproved">
       {{ author }}
     </span>
@@ -33,11 +37,11 @@
     </span>
   </div>
 
-  <button mat-button class="floating-button" routerLink="/add-story" [state]="{ story: story }">
+  <button *ngIf="canEdit" mat-button class="floating-button" routerLink="/add-story" [state]="{ story: story }">
     Edit story <mat-icon>edit</mat-icon>
   </button>
   <button mat-button class="floating-button-blue" routerLink="/journeys" [state]="{ story: story }">
     Link to journey <mat-icon>timeline</mat-icon>
   </button>
-  <button mat-button class="floating-button-grey" (click)="deleteStoryPopup()">Delete <mat-icon>delete</mat-icon></button>
+  <button *ngIf="canEdit" mat-button class="floating-button-grey" (click)="deleteStoryPopup()">Delete <mat-icon>delete</mat-icon></button>
 </div>

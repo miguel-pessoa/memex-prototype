@@ -3,7 +3,6 @@
     <span class="title">Journey filters:</span>
     <mat-checkbox [(ngModel)]="myJourneys" (change)="selectFilter()">My stories</mat-checkbox>
     <mat-checkbox [(ngModel)]="recentJourneys" (change)="selectFilter()">Recently added</mat-checkbox>
-    <mat-checkbox (change)="selectFilter()">TODO</mat-checkbox>
   </mat-sidenav>
   <mat-sidenav-content>
     <button mat-button class="floating-button" routerLink="/add-journey">Create <mat-icon>add</mat-icon></button>
@@ -12,7 +11,7 @@
       <span class="filters" (click)="toggleFilters()"><mat-icon>filter_list</mat-icon></span>
     </div>
     <div class="stories-padding">
-      <jhi-journey (click)="linkStory(journey, $event)" *ngFor="let journey of displayedJourneys" [journey]="journey"></jhi-journey>
+      <jhi-journey *ngFor="let journey of displayedJourneys" [storyToLink]="storyToLink" [journey]="journey"></jhi-journey>
     </div>
   </mat-sidenav-content>
 </mat-sidenav-container>

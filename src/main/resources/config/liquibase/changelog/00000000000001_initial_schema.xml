@@ -25,7 +25,7 @@
             <column name="add_cover_image7" type="text"/>
             <column name="add_cover_image8" type="text"/>
             <column name="add_cover_image9" type="text"/>
-            <column name="add_cover_image10" type="text"/><column name="additional_media" type="varchar(2000)"/>
+            <column name="add_cover_image10" type="text"/>
             <column name="author" type="varchar(255)"/>
             <column name="co_authors" type="varchar(2000)"/>
             <column name="co_authors_approved" type="varchar(2000)"/>
@@ -60,6 +60,66 @@
             <column name="name" type="varchar(2000)"/>
             <column name="age" type="BIGINT"/>
         </createTable>
+
+        <loadData
+                  file="config/liquibase/data/story.csv"
+                  separator="|"
+                  tableName="story"
+                  usePreparedStatements="true">
+            <column name="id" type="numeric"/>
+            <column name="title" type="varchar(255)"/>
+            <column name="location" type="varchar(255)"/>
+            <column name="description" type="varchar(2000)"/>
+            <column name="tags" type="varchar(2000)"/>
+            <column name="cover_image" type="text"/>
+            <column name="add_cover_image1" type="text"/>
+            <column name="add_cover_image2" type="text"/>
+            <column name="add_cover_image3" type="text"/>
+            <column name="add_cover_image4" type="text"/>
+            <column name="add_cover_image5" type="text"/>
+            <column name="add_cover_image6" type="text"/>
+            <column name="add_cover_image7" type="text"/>
+            <column name="add_cover_image8" type="text"/>
+            <column name="add_cover_image9" type="text"/>
+            <column name="add_cover_image10" type="text"/>
+            <column name="author" type="varchar(255)"/>
+            <column name="co_authors" type="varchar(2000)"/>
+            <column name="co_authors_approved" type="varchar(2000)"/>
+            <column name="published" type="boolean"/>
+            <column name="progress" type="numeric"/>
+            <column name="created_date" type="timestamp"/>
+            <column name="updated_date" type="timestamp"/>
+        </loadData>
+
+        <loadData
+                  file="config/liquibase/data/user_profile.csv"
+                  separator="|"
+                  tableName="user_profile"
+                  usePreparedStatements="true">
+            <column name="id" type="numeric"/>
+            <column name="username" type="varchar(255)"/>
+            <column name="cover_image" type="text"/>
+            <column name="name" type="varchar(2000)"/>
+            <column name="age" type="numeric"/>
+        </loadData>
+
+        <loadData
+                  file="config/liquibase/data/journey.csv"
+                  separator="|"
+                  tableName="journey"
+                  usePreparedStatements="true">
+            <column name="id" type="numeric"/>
+            <column name="author" type="varchar(255)"/>
+            <column name="title" type="varchar(255)"/>
+            <column name="description" type="varchar(2000)"/>
+            <column name="cover_image" type="text"/>
+            <column name="storys_ids" type="varchar(2000)"/>
+            <column name="published" type="boolean"/>
+            <column name="progress" type="numeric"/>
+            <column name="color" type="numeric"/>
+            <column name="created_date" type="timestamp"/>
+            <column name="updated_date" type="timestamp"/>
+        </loadData>
 
     </changeSet>
 </databaseChangeLog>

@@ -21,10 +21,14 @@
       </div>
     </div>
     <br />
-    <jhi-valid-input [size]="'large'" [label]="'Story title *'" [(model)]="journey.title"></jhi-valid-input>
+    <jhi-valid-input [size]="'large'" [label]="'Journey title'" [control]="titleFormControl"></jhi-valid-input>
     <br />
     <mat-form-field appearance="outline" class="w-100 textarea">
       <textarea #descriptionInput matInput cdkTextareaAutosize [formControl]="descriptionFormControl"></textarea>
+      <mat-error *ngIf="descriptionFormControl.touched && descriptionFormControl.errors?.required">{{
+        'error.mandatory' | translate
+      }}</mat-error>
+
       <mat-label> Description</mat-label>
     </mat-form-field>
     <button mat-button *ngIf="stepCount === 0" (click)="nextStep(0)">Next</button>
@@ -44,8 +48,8 @@
     <span class="subtitle"> Select type of journey <mat-icon>info</mat-icon> </span>
 
     <mat-button-toggle-group class="order-select">
-      <mat-button-toggle>Ordered</mat-button-toggle>
-      <mat-button-toggle>Unordered</mat-button-toggle>
+      <mat-button-toggle (click)="journey.ordered = true">Ordered</mat-button-toggle>
+      <mat-button-toggle (click)="journey.ordered = false">Unordered</mat-button-toggle>
     </mat-button-toggle-group>
     <button mat-button (click)="publish()">Publish</button>
   </div>

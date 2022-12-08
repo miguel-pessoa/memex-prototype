@@ -17,7 +17,7 @@ export class StoryComponent implements OnInit {
   constructor(private userProfileService: UserProfileService) {}
 
   public ngOnInit(): void {
-    this.coAuthors = this.story.coAuthorsApproved.split(';;');
+    this.coAuthors = this.story.coAuthorsApproved ? this.story.coAuthorsApproved.split(';;') : [];
     this.userProfileService.findByUsername(this.story.author).subscribe(result => {
       if (result.id) {
         this.userProfile = result;
@@ -26,6 +26,6 @@ export class StoryComponent implements OnInit {
   }
 
   public returnDate(date: string): string {
-    return date.split('T')[0];
+    return date ? date.split('T')[0] : '';
   }
 }

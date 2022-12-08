@@ -138,7 +138,7 @@
       "not.image": "File was expected to be an image but was found to be \"{{ fileType }}\""
     }
   },
-  "footer": "MEMEX Project prototype",
+  "footer": "",
   "stories": {
     "add": {
       "title": "Create new story"

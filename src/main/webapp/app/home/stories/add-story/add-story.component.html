@@ -1,6 +1,6 @@
 <div class="step">
   <span class="title"> <mat-icon (click)="back()">arrow_back</mat-icon> Create new story </span>
-  <jhi-valid-input (click)="openMap()" [size]="'large'" [label]="'Location *'" [(model)]="story.location"></jhi-valid-input>
+  <jhi-valid-input [size]="'large'" [label]="'Location'" [control]="locationFormControl"></jhi-valid-input>
 
   <div class="cover-image">
     <img class="image" *ngIf="coverPicture" [src]="coverPicture" />
@@ -35,6 +35,9 @@
   <br />
   <mat-form-field appearance="outline" class="w-100 textarea">
     <textarea #descriptionInput matInput cdkTextareaAutosize [formControl]="descriptionFormControl"></textarea>
+    <mat-error *ngIf="descriptionFormControl.touched && descriptionFormControl.errors?.required">{{
+      'error.mandatory' | translate
+    }}</mat-error>
     <mat-label> Description</mat-label>
   </mat-form-field>
   <button mat-button *ngIf="stepCount === 1" (click)="nextStep(1)">Next</button>
@@ -60,7 +63,6 @@
 </div>
 
 <div *ngIf="stepCount > 2">
-  <br />
   <div>Select at least one tag:</div>
   <div class="tags">
     <div
